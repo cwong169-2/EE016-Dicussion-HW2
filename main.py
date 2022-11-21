@@ -13,7 +13,13 @@ def multi_sort(arr, cmp, method="None"):
     else:
         print("invalid argument!")
 
-
+def cmp(a,b):
+    if a < b:
+        return -1
+    elif a == b:
+        return 0
+    else:
+        return 1
 
 
 # must be in-place sort
@@ -22,4 +28,22 @@ def merge_sort(arr,cmp):
 
 # must be in-place sort
 def quick_sort(arr,cmp):
+    if len(arr) <= 1:
+        return arr
+    pvt = arr[np.random.randint(len(arr))]
+    arrSmall = []
+    arrMid = []
+    arrLarge = []
+    for e in arr :
+        if (cmp(pvt,e) > 0):
+            arrSmall.append(e)
+        elif (cmp(pvt,e) < 0):
+            arrLarge.append(e)
+        else:
+            arrMid.append(e)
+    arrSmall = quick_sort(arrSmall,cmp)
+    arrLarge = quick_sort(arrLarge,cmp)
+    arr = arrSmall + arrMid + arrLarge
+    return arr
     pass
+
